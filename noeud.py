@@ -30,7 +30,7 @@ class Noeud:
         # Le jeu est terminé s'il y a un gagnant ou si le plateau est plein
         return self.check_winner() is not None or self.is_full()
 
-    def get_successor(self):
+    def get_successors(self):
         if self.is_terminal():
             return []  # Aucun mouvement possible si le jeu est terminé
         
@@ -59,6 +59,6 @@ class Noeud:
         return '\n'.join(' ' * indent + '|'.join(row) for row in self.board)
     
     def __repr__(self):
-        return f"Noeud({self.board}, {self.player_to_move})"
+        return f"Noeud(\n{str(self)}\n, {self.player_to_move})"
     
     

@@ -4,7 +4,7 @@ def print_tree(root, indent= 0, depth=1):
     print(root.str_with_indent(indent))
     print()
     if depth > 1:
-        for succ in root.get_successor():
+        for succ in root.get_successors():
             print_tree(succ, indent + 4, depth - 1)
     
 
@@ -14,7 +14,7 @@ def minimax(node, depth, us='X'):
     if node.player_to_move == us:
         maxEval = -1000
         best_move = None
-        for child in node.get_successor():
+        for child in node.get_successors():
             eval, _ = minimax(child, depth - 1, us)
             if eval > maxEval:
                 maxEval = eval
@@ -23,7 +23,7 @@ def minimax(node, depth, us='X'):
     else:
         minEval = 1000
         best_move = None
-        for child in node.get_successor():
+        for child in node.get_successors():
             eval, _ = minimax(child, depth - 1, us)
             if eval < minEval:
                 minEval = eval
@@ -37,7 +37,7 @@ def alphabeta(node, depth, alpha, beta, us='X'):
     if node.player_to_move == us:
         maxEval = -1000
         best_move = None
-        for child in node.get_successor():
+        for child in node.get_successors():
             eval, _ = alphabeta(child, depth - 1, alpha, beta, us)
             if eval > maxEval:
                 maxEval = eval
@@ -49,7 +49,7 @@ def alphabeta(node, depth, alpha, beta, us='X'):
     else:
         minEval = 1000
         best_move = None
-        for child in node.get_successor():
+        for child in node.get_successors():
             eval, _ = alphabeta(child, depth - 1, alpha, beta, us)
             if eval < minEval:
                 minEval = eval
@@ -62,8 +62,11 @@ def alphabeta(node, depth, alpha, beta, us='X'):
 
 def main():
     nd = Noeud()
-    print_tree(nd, depth=3)
+    print("node tree with depth 4")
+    print_tree(nd, depth=4)
+    print("minimax")
     print(minimax(nd, 1000))
+    print("alphabeta")
     print(alphabeta(nd, 1000, -1000, 1000))
     
     
